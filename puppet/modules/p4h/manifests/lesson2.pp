@@ -37,7 +37,7 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	$msg = inline_template('')
 
 }
 
