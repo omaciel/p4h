@@ -37,7 +37,35 @@ Level 42:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	cron { "manual-puppet":
+            command => "/usr/bin/date >> /root/thetime.log",
+                        user => "root",
+                        hour => "*",
+                        ensure => present,
+                    }
+
+    file { '/root/outside/':
+        ensure => directory,
+        owner => 'root',
+    }
+    file { "/root/outside/inside.txt":
+            ensure => file,
+            require => File['/root/outside/'],
+            owner => 'root',
+            content => 'Hello World!',
+    }
+
+    host { 'yahoo':
+         name => 'www.yahoo.com',
+         ensure => present,
+         ip => '98.139.183.24',
+    }
+
+    mount { '/root/nfs':
+          ensure => present,
+          device => '/',
+          options => 'rw',
+    }
 
 }
 
