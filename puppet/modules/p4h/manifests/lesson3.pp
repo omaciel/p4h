@@ -32,8 +32,16 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
-
+	notice (concat(['1','2','3'],['4','5','6']))
+    notice (count([5, 3, 10]))
+    notice (delete(['a','b','c','b'], 'b'))
+    notice (flatten(['a', ['b', ['c']]]))
+    $datalocation = 'p4h::name'
+    notice (getvar("site::data"))
+    $my_hash = {'key_one' => 'value_one'}
+    if has_key($my_hash, 'key_two') {
+        notice('we will not reach here')
+}
 }
 
 # vim: ts=8
