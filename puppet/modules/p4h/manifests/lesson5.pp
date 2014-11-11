@@ -44,8 +44,8 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
 
+    notify { 'whoami': message => "${customer}",}
 }
 
 # vim: ts=8
