@@ -43,9 +43,25 @@ Level 42:
 
 Happy hacking!\n",
 	}
+    file { "/root/baz/":
+		ensure => directory,		# make sure this is a directory
+		recurse => true,		# recursively manage directory
+		purge => true,			# purge all unmanaged files
+		force => true,			# also purge subdirs and links
+		owner => root, group => nobody, mode => 600, backup => false,
+	}
 
-	# XXX: write your code here...
+    file { '/root/baz/hello.txt':
+         ensure => present,
+         content => inline_template('Welcome to <%= @hostname %>'),
+     	 require => File["/root/baz/"],
+    }
 
+    $group_data_list = ['1=one', '2=two', '3=three', '4=four']
+    $group_data_yaml = inline_template("<%= @group_data_list.inject(Hash.new) { |h,i| { '${volume}#'+((i.split('=').length == 2) ? i.split('=')[0] : '') => {'message' => ((i.split('=').length == 2) ? i.split('=')[1] : '')} }.merge(h) }.to_yaml %>")
+	# build into a hash
+	$group_data_hash = parseyaml($group_data_yaml)
+    create_resources(notify, $group_data_hash)
 }
 
 # vim: ts=8
