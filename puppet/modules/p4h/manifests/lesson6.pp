@@ -32,8 +32,12 @@ Bonus:
 Happy hacking!\n",
 	}
 
-	# XXX: write your code here...
+	define foo($sport='hockey', $team='N.J. Devils') {
+        notify {$sport: message => "Let's go ${team}!",}
+    }
 
+    foo { 'chant1': sport => 'hockey', team => 'Devils'}
+    foo { 'chant2': sport => 'baseball', team => 'Yankees'}
 }
 
 # vim: ts=8
