@@ -45,8 +45,12 @@ Level 42:
 
 Happy hacking!\n",
 	}
-
-	# XXX: write your code here...
+    @@file { "/root/$fqdn":
+           ensure => present,
+           content => "${ipaddress} - ${fqdn}",
+           tag => "content_host",
+           }
+    File <<| tag == "content_host" |>>
 
 }
 
